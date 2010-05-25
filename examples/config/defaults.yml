@@ -1,0 +1,38 @@
+# Window
+#
+:width: 800
+:height: 600
+:caption: Flonkerton Example
+:font_size: 20
+:fullscreen: false
+:initial_screen: Example::GameScreen
+
+# Resources
+#
+:fonts_path: '../media/*.ttf'
+:songs_path: '../media/*.ogg'
+:tiles_path: '../media/*.png'
+:images_path: '../media/*.png'
+:samples_path: '../media/*.wav'
+
+# Defaults
+#
+:image:
+  :x: 0
+  :y: 0
+  :z: 0
+  :factor_x: 1
+  :factor_y: 1
+  :color: 0xffffffff
+  :mode: :default
+  :order: [:x, :y, :z, :factor_x, :factor_y, :color, :mode] # For 1.8.6 - Don't change this
+:font:
+  :text: ''
+  :x: 0
+  :y: 0
+  :z: 0
+  :factor_x: 1
+  :factor_y: 1
+  :color: 0xffffffff
+  :mode: :default
+  :order: [:text, :x, :y, :z, :factor_x, :factor_y, :color, :mode] # For 1.8.6 - Don't change this
