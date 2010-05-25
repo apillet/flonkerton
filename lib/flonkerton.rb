@@ -96,7 +96,7 @@ module Flonkerton
   class Fonts < Resource
     def self.load(game)
       super(game)
-      @hash[:default] = Font.new(game, Gosu::default_font_name)
+      all[:default] = Font.new(game, Gosu::default_font_name)
     end
   end
 

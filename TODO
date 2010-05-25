@@ -10,3 +10,4 @@ TODO
 - Add Window#update_interval
 - Add Screen#gl
 - Write some mini-games.
+- Fix starfighter.png
