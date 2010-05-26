@@ -302,7 +302,7 @@ Protest.describe('Resource - Fonts') do
     assert_kind_of Flonkerton::Font, Flonkerton::Fonts[:default]
   end
 
-  it 'loads all fonts in CONFIG[:fonts_path].' do
+  it 'loads all fonts in CONFIG[:media_path].' do
     path = File.join(Flonkerton::CONFIG[:media_path], Flonkerton::CONFIG[:fonts_ext])
     files = Dir[path]
     assert files.any?
