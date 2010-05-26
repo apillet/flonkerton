@@ -9,7 +9,14 @@ end
 
 module Flonkerton
   VERSION = '0.0.1'
-  CONFIG = YAML.load_file('config/defaults.yml')
+  LIB_PATH = File.dirname(File.expand_path(__FILE__))
+  CURRENT_PATH = File.dirname(File.expand_path($0))
+
+  if File.exist?(CURRENT_PATH + '/config/defaults.yml')
+    CONFIG = YAML.load_file(CURRENT_PATH + '/config/defaults.yml')
+  else
+    CONFIG = YAML.load_file(LIB_PATH + '/../config/defaults.yml')
+  end
 
   module Drawable
     def draw(options = {})
@@ -85,7 +92,11 @@ module Flonkerton
     end
 
     def self.path
-      CONFIG["#{name.downcase}_path".intern]
+      File.join(CONFIG[:media_path], extension)
+    end
+
+    def self.extension
+      CONFIG["#{name.downcase}_ext".intern]
     end
   end
 

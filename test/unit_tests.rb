@@ -8,11 +8,12 @@ Protest.describe('Flonkerton') do
                :fullscreen => false,
                :font_size => 20,
                :initial_screen => "WelcomeScreen",
-               :songs_path => "media/*.ogg",
-               :images_path => "media/*.png",
-               :samples_path => "media/*.wav",
-               :tiles_path => "media/*.png",
-               :fonts_path => "media/*.ttf",
+               :media_path => "media",
+               :songs_ext => "*.ogg",
+               :images_ext => "*.png",
+               :samples_ext => "*.wav",
+               :tiles_ext => "*.png",
+               :fonts_ext => "*.ttf",
                :image => { :x => 0,
                            :y => 0,
                            :z => 0,
@@ -302,7 +303,8 @@ Protest.describe('Resource - Fonts') do
   end
 
   it 'loads all fonts in CONFIG[:fonts_path].' do
-    files = Dir[Flonkerton::CONFIG[:fonts_path]]
+    path = File.join(Flonkerton::CONFIG[:media_path], Flonkerton::CONFIG[:fonts_ext])
+    files = Dir[path]
     assert files.any?
     fonts = [Flonkerton::Fonts[:default]]
     files.each do |file|
@@ -313,8 +315,9 @@ Protest.describe('Resource - Fonts') do
 end
 
 Protest.describe('Resource - Images') do
-  it 'loads all images in CONFIG[:images_path].' do
-    files = Dir[Flonkerton::CONFIG[:images_path]]
+  it 'loads all images in CONFIG[:media_path].' do
+    path = File.join(Flonkerton::CONFIG[:media_path], Flonkerton::CONFIG[:images_ext])
+    files = Dir[path]
     assert files.any?
     images = []
     files.each do |file|
@@ -325,8 +328,9 @@ Protest.describe('Resource - Images') do
 end
 
 Protest.describe('Resource - Songs') do
-  it 'loads all songs in CONFIG[:songs_path].' do
-    files = Dir[Flonkerton::CONFIG[:songs_path]]
+  it 'loads all songs in CONFIG[:media_path].' do
+    path = File.join(Flonkerton::CONFIG[:media_path], Flonkerton::CONFIG[:songs_ext])
+    files = Dir[path]
     assert files.any?
     songs = []
     files.each do |file|
@@ -337,8 +341,9 @@ Protest.describe('Resource - Songs') do
 end
 
 Protest.describe('Resource - Samples') do
-  it 'loads all samples in CONFIG[:samples_path].' do
-    files = Dir[Flonkerton::CONFIG[:samples_path]]
+  it 'loads all samples in CONFIG[:media_path].' do
+    path = File.join(Flonkerton::CONFIG[:media_path], Flonkerton::CONFIG[:samples_ext])
+    files = Dir[path]
     assert files.any?
     samples = []
     files.each do |file|
@@ -349,8 +354,9 @@ Protest.describe('Resource - Samples') do
 end
 
 Protest.describe('Resource - Tiles') do
-  it 'loads all images in CONFIG[:tiles_path] that looks like a tileset. (eg. woods_64x64.png)' do    
-    files = Dir[Flonkerton::CONFIG[:tiles_path]]
+  it 'loads all images in CONFIG[:media_path] that looks like a tileset. (eg. woods_64x64.png)' do
+    path = File.join(Flonkerton::CONFIG[:media_path], Flonkerton::CONFIG[:tiles_ext])
+    files = Dir[path]
     assert files.any?
     tiles = []
     files.each do |file|

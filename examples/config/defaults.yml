@@ -9,11 +9,12 @@
 
 # Resources
 #
-:fonts_path: '../media/*.ttf'
-:songs_path: '../media/*.ogg'
-:tiles_path: '../media/*.png'
-:images_path: '../media/*.png'
-:samples_path: '../media/*.wav'
+:media_path: ../media
+:fonts_ext: *.ttf
+:songs_ext: *.ogg
+:tiles_ext: *.png
+:images_ext: *.png
+:samples_ext: *.wav
 
 # Defaults
 #
