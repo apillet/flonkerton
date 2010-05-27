@@ -1,0 +1,31 @@
+<% require "lib/flonkerton" -%>
+Gem::Specification.new do |s|
+  s.name              = "flonkerton"
+  s.version           = "<%= Flonkerton::VERSION %>"
+  s.summary           = "Gosu toys for the bored rubyist."
+  s.description       = "A simple framework that aims to improve your Gosu experience."
+  s.authors           = ["Ariel H. Pillet"]
+  s.email             = ["apillet@gmail.com"]
+  s.homepage          = "http://github.com/apillet/flonkerton"
+  s.files = <%= Dir[
+    "LICENSE",
+    "TODO",
+    "README.md",
+    "media/CREDITS",
+    "Rakefile",
+    "watchmen.rb",
+    "config/*.yml",
+    "examples/**/*.*",
+    "games/**/*.*",
+    "lib/**/*.rb",
+    "*.gemspec",
+    "media/*.*",
+    "test/**/*.rb"
+  ].inspect %>
+
+  s.rubyforge_project = "flonkerton"
+  s.add_dependency "gosu", ">= 0.7.19"
+  s.add_development_dependency "protest", ">= 0.3.1"
+  s.add_development_dependency "rr", ">= 0.10.11"
+  s.add_development_dependency "watchr", ">= 0.6"
+end

@@ -10,7 +10,7 @@ Also [Protest](http://github.com/matflores/protest), [RR](http://github.com/btak
 
 ## Installation
 
-    git clone git://github.com/apillet/flonkerton.git
+    $ sudo gem install flonkerton
 
 ## Features
 
