@@ -72,8 +72,11 @@ See [examples](/apillet/flonkerton/tree/master/examples/).
 ## Related Projects
 
 * [Chingu](http://github.com/ippa/chingu)
+* [Compote](http://github.com/HakubJozak/compote)
 * [Exuberant](http://github.com/adamsanderson/lexery/tree/master/lib/exuberant)
 * [FWD](http://github.com/walski/FWD)
+* [Gosu Extensions](http://github.com/floere/gosu_extensions)
+* [Grandpa](http://github.com/arirusso/grandpa)
 * [Lotu](http://github.com/lobo-tuerto/lotu)
 * [Nimo](http://github.com/moonpxi/nimo)
 * [PuitUniverse](http://github.com/oneup/puituniverse)
