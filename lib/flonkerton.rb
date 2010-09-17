@@ -8,7 +8,7 @@ class File
 end
 
 module Flonkerton
-  VERSION = '0.0.1'
+  VERSION = '0.0.2'
   LIB_PATH = File.dirname(File.expand_path(__FILE__))
   CURRENT_PATH = File.dirname(File.expand_path($0))
 

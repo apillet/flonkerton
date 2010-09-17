@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name              = "flonkerton"
-  s.version           = "0.0.1"
+  s.version           = "0.0.2"
   s.summary           = "Gosu toys for the bored rubyist."
   s.description       = "A simple framework that aims to improve your Gosu experience."
   s.authors           = ["Ariel H. Pillet"]
@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
 
   s.rubyforge_project = "flonkerton"
   s.add_dependency "gosu", ">= 0.7.19"
-  s.add_development_dependency "protest", ">= 0.3.1"
-  s.add_development_dependency "rr", ">= 0.10.11"
+  s.add_development_dependency "protest", ">= 0.4.1"
+  s.add_development_dependency "override", ">= 0.0.10"
   s.add_development_dependency "watchr", ">= 0.6"
 end
