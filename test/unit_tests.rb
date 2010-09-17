@@ -44,11 +44,11 @@ end
 
 Protest.describe('A Game Window') do
   it 'has a current screen. (default: WelcomeScreen)' do
-    assert_kind_of Flonkerton::WelcomeScreen, window.screen
+    assert window.screen.is_a?(Flonkerton::WelcomeScreen)
   end
 
   it 'has a next screen. (default: nil)' do
-    assert_nil window.next_screen
+    assert window.next_screen.nil?
   end
 
   it 'updates the current screen.' do
@@ -92,11 +92,12 @@ Protest.describe('A Game Window') do
 
     it 'can switch between them.' do
       @window = Flonkerton::Window.new(Example::LogoScreen)
-      assert_kind_of Example::LogoScreen, @window.screen
+
+      assert @window.screen.is_a?(Example::LogoScreen)
       @window.update
-      assert_kind_of Example::GameScreen, @window.screen
+      assert @window.screen.is_a?(Example::GameScreen)
       @window.update
-      assert_kind_of Example::CreditsScreen, @window.screen
+      assert @window.screen.is_a?(Example::CreditsScreen)
     end
   end
 
@@ -121,8 +122,8 @@ Protest.describe('A Screen') do
   end
 
   it 'has mouse coordinates.' do
-    assert_kind_of Numeric, @screen.mouse_x
-    assert_kind_of Numeric, @screen.mouse_y
+    assert @screen.mouse_x.is_a?(Numeric)
+    assert @screen.mouse_y.is_a?(Numeric)
   end
 
   it 'closes itself when Escape is pressed.' do
@@ -142,19 +143,19 @@ Protest.describe('A Screen') do
   # Empty methods to override.
   #
   it 'can setup before game loop.' do
-    assert_respond_to @screen, :setup
+    assert @screen.respond_to?(:setup)
   end
 
   it 'check button_up events while in game loop.' do
-    assert_respond_to @screen, :button_up
+    assert @screen.respond_to?(:button_up)
   end
 
   it 'updates game logic while in game loop.' do
-    assert_respond_to @screen, :update
+    assert @screen.respond_to?(:update)
   end
 
   it 'draws while in game loop.' do
-    assert_respond_to @screen, :draw
+    assert @screen.respond_to?(:draw)
   end
 
   it 'can switch to another screen.' do
@@ -246,7 +247,7 @@ Protest.describe('A Sample') do
   end
 
   it 'is a Gosu::Sample.' do
-    assert_kind_of Gosu::Sample, @sample
+    assert @sample.is_a?(Gosu::Sample)
   end
 end
 
@@ -256,7 +257,7 @@ Protest.describe('A Song') do
   end
 
   it 'is a Gosu::Song.' do
-    assert_kind_of Gosu::Song, @song
+    assert @song.is_a?(Gosu::Song)
   end
 
   it 'has a loop method.' do
@@ -272,7 +273,7 @@ Protest.describe('A Font') do
   end
 
   it 'is a Gosu::Font.' do
-    assert_kind_of Gosu::Font, @font
+    assert @font.is_a?(Gosu::Font)
   end
 
   it 'has a draw method that takes an options hash.' do
@@ -288,7 +289,7 @@ Protest.describe('An Image') do
   end
 
   it 'is a Gosu::Image.' do
-    assert_kind_of Gosu::Image, @image
+    assert @image.is_a?(Gosu::Image)
   end
 
   it 'has a draw method that takes an options hash.' do
@@ -306,7 +307,7 @@ end
 
 Protest.describe('Resource - Fonts') do
   it 'has a :default font.' do
-    assert_kind_of Flonkerton::Font, Flonkerton::Fonts[:default]
+    assert Flonkerton::Fonts[:default].is_a?(Flonkerton::Font)
   end
 
   it 'loads all fonts in CONFIG[:media_path].' do
@@ -375,7 +376,7 @@ Protest.describe('Resource - Tiles') do
 
     # returns Gosu::Image
     image = tiles.first.first
-    assert_kind_of Gosu::Image, image
+    assert image.is_a?(Gosu::Image)
 
     # ..but draw takes a hash, same as Flonkerton::Image
     assert_nothing_raised do
