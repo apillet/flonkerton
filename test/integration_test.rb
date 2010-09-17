@@ -108,8 +108,6 @@ Protest.context('A Game example') do
   end
 
   it "should work." do
-    assert_nothing_raised do
-      Flonkerton::Game.start(Example::LogoScreen)
-    end
+    Flonkerton::Game.start(Example::LogoScreen)
   end
 end

@@ -277,9 +277,7 @@ Protest.describe('A Font') do
   end
 
   it 'has a draw method that takes an options hash.' do
-    assert_nothing_raised do
-      @font.draw :text => 'test', :color => Gosu::Color::RED
-    end
+    @font.draw :text => 'test', :color => Gosu::Color::RED
   end
 end
 
@@ -293,9 +291,7 @@ Protest.describe('An Image') do
   end
 
   it 'has a draw method that takes an options hash.' do
-    assert_nothing_raised do
-      @image.draw :x => 20, :mode => :additive
-    end
+    @image.draw :x => 20, :mode => :additive
   end
 end
 
@@ -379,9 +375,7 @@ Protest.describe('Resource - Tiles') do
     assert image.is_a?(Gosu::Image)
 
     # ..but draw takes a hash, same as Flonkerton::Image
-    assert_nothing_raised do
-      image.draw :x => 20, :mode => :additive
-    end
+    image.draw :x => 20, :mode => :additive
   end
 end
 
