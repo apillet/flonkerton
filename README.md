@@ -6,7 +6,7 @@ Gosu toys for the bored rubyist.
 
 You'll need [Gosu](http://www.libgosu.org/).
 
-Also [Protest](http://github.com/matflores/protest), [RR](http://github.com/btakita/rr) and [Watchr](http://github.com/mynyml/watchr) for test awesomeness.
+Also [Protest](http://github.com/matflores/protest), [Override](http://github.com/soveran/override) and [Watchr](http://github.com/mynyml/watchr) for test awesomeness.
 
 ## Installation
 
