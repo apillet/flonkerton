@@ -51,53 +51,63 @@ Protest.describe('A Game Window') do
     assert window.next_screen.nil?
   end
 
-  it 'updates the current screen.' do
-    pending
-    mock(@window.screen).update
-    @window.update
-  end
-
-  it 'draws the current screen.' do
-    pending
-    mock(@window.screen).draw
-    @window.draw
-  end
-
-  it 'passes button_down events to the current screen.' do
-    pending
-    mock(@window.screen).button_down(Gosu::KbA)
-    @window.button_down(Gosu::KbA)
-  end
-
-  it 'passes button_up events to the current screen.' do
-    pending
-    mock(@window.screen).button_up(Gosu::KbA)
-    @window.button_up(Gosu::KbA)
-  end
-
-  context('when working with several screens') do
+  context('when running') do
     module Example
       class LogoScreen < Flonkerton::Screen
+        def setup
+          params[:log] = Array.new
+        end
+
+        def button_down(id)
+          params[:log] << 'press'
+        end
+
+        def button_up(id)
+          params[:log] << 'release'
+        end
+
         def update
+          params[:log] << 'update'
+        end
+
+        def draw
+          params[:log] << 'draw'
           go_to(GameScreen)
         end
       end
       class GameScreen < Flonkerton::Screen
-        def update
-          go_to(CreditsScreen)
+        def setup
+          params[:log] << 'new screen'
         end
       end
-      class CreditsScreen < Flonkerton::Screen; end
     end
 
-    it 'can switch between them.' do
-      @window = Flonkerton::Window.new(Example::LogoScreen)
+    setup do
+      window.next_screen = Example::LogoScreen
+      window.update
+    end
 
-      assert @window.screen.is_a?(Example::LogoScreen)
-      @window.update
-      assert @window.screen.is_a?(Example::GameScreen)
-      @window.update
-      assert @window.screen.is_a?(Example::CreditsScreen)
+    it 'draw and update the current screen.' do
+      assert window.params[:log].empty?
+
+      # Fake a Gosu::Window.show loop iteration
+      #
+      window.button_down(Gosu::KbSpace)
+      window.button_up(Gosu::KbSpace)
+      window.update
+      window.draw
+
+      result = {:log => ['press', 'release', 'update', 'draw']}
+      assert_equal result, window.params
+
+      # Change screen on next tick
+      window.update
+
+      assert window.params[:log].include?('new screen')
+    end
+
+    after do
+      window.params.clear
     end
   end
 
@@ -127,15 +137,15 @@ Protest.describe('A Screen') do
   end
 
   it 'closes itself when Escape is pressed.' do
-    pending
-    mock(@screen).close
+    override(@screen, :close => lambda { params[:close] = true })
+
+    assert @screen.params.empty?
     @screen.button_down(Gosu::KbEscape)
+    assert !@screen.params.empty?
   end
 
   it 'knows if a button is down.' do
-    pending
-    stub(@game).button_down?(Gosu::KbA) { true }
-    stub(@game).button_down?(Gosu::KbZ) { false }
+    override(window, :button_down? => lambda {|id| id == Gosu::KbA })
     assert @screen.button_down?(Gosu::KbA)
     assert !@screen.button_down?(Gosu::KbZ)
   end
@@ -156,26 +166,6 @@ Protest.describe('A Screen') do
 
   it 'draws while in game loop.' do
     assert @screen.respond_to?(:draw)
-  end
-
-  it 'can switch to another screen.' do
-    pending
-    module Example
-      class LogoScreen < Flonkerton::Screen
-        def update
-          go_to(GameScreen)
-        end
-      end
-      class GameScreen < Flonkerton::Screen
-        def update
-          close
-        end
-      end
-    end
-
-    @game = Flonkerton::Window.new(Example::LogoScreen)
-    mock(@game).next_screen=(Example::GameScreen)
-    @game.update
   end
 
   it 'shares a params hash with other screens.' do
@@ -205,15 +195,11 @@ Protest.describe('A Screen') do
   end
 
   it 'can close itself.' do
-    pending
-    mock(@game).close
-    @screen.close
+    assert @screen.respond_to?(:close) # ...
   end
 
   it 'can clip an image.' do
-    pending
-    mock(@game).clip_to(10, 20, 200, 300)
-    @screen.clip_to(10, 20, 200, 300)
+    assert @screen.respond_to?(:clip_to) # ...
   end
 
   it 'calls setup method after initialization.' do
@@ -230,14 +216,30 @@ Protest.describe('A Screen') do
 end
 
 Protest.describe('A WelcomeScreen') do
+  module DrawLog
+    def data
+      @data ||= []
+    end
+
+    def draw options = {}
+      data << options[:text]
+    end
+
+    def wrote? text
+      data.include? text
+    end
+  end
+  Flonkerton::Font.send(:include, DrawLog)
+
   setup do
     @welcome_screen = Flonkerton::WelcomeScreen.new(window)
   end
 
   it 'shows a brief explanation about Flonkerton.' do
-    pending
-    mock(Flonkerton::Fonts[:default]).draw(:text => 'Welcome')
+    font = Flonkerton::Fonts[:default]
+    assert !font.wrote?('Welcome')
     @welcome_screen.draw
+    assert font.wrote?('Welcome')
   end
 end
 
@@ -261,9 +263,7 @@ Protest.describe('A Song') do
   end
 
   it 'has a loop method.' do
-    pending
-    mock(@song).play(true)
-    @song.loop
+    assert @song.respond_to?(:loop) # ...
   end
 end
 
