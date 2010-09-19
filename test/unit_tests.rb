@@ -51,6 +51,10 @@ Protest.describe('A Game Window') do
     assert window.next_screen.nil?
   end
 
+  it 'has a params hash.' do
+    assert_equal Hash.new, window.params
+  end
+
   context('when running') do
     module Example
       class LogoScreen < Flonkerton::Screen
@@ -110,10 +114,6 @@ Protest.describe('A Game Window') do
       window.params.clear
     end
   end
-
-  it 'has a params hash.' do
-    assert_equal Hash.new, window.params
-  end
 end
 
 Protest.describe('A Screen') do
@@ -150,68 +150,12 @@ Protest.describe('A Screen') do
     assert !@screen.button_down?(Gosu::KbZ)
   end
 
-  # Empty methods to override.
-  #
-  it 'can setup before game loop.' do
-    assert @screen.respond_to?(:setup)
-  end
-
-  it 'check button_up events while in game loop.' do
-    assert @screen.respond_to?(:button_up)
-  end
-
-  it 'updates game logic while in game loop.' do
-    assert @screen.respond_to?(:update)
-  end
-
-  it 'draws while in game loop.' do
-    assert @screen.respond_to?(:draw)
-  end
-
-  it 'shares a params hash with other screens.' do
-    module Example
-      class LogoScreen < Flonkerton::Screen
-        def setup
-          params[:foo] = 200
-        end
-        def update
-          go_to(GameScreen)
-        end
-      end
-      class GameScreen < Flonkerton::Screen
-        def setup
-          params[:bar] = 'abc' + params[:foo].to_s
-        end
-        def update
-          close
-        end
-      end
-    end
-
-    @game = Flonkerton::Window.new(Example::LogoScreen)
-    @game.update
-    assert_equal 200, @game.params[:foo]
-    assert_equal 'abc200', @game.params[:bar]
-  end
-
   it 'can close itself.' do
     assert @screen.respond_to?(:close) # ...
   end
 
   it 'can clip an image.' do
     assert @screen.respond_to?(:clip_to) # ...
-  end
-
-  it 'calls setup method after initialization.' do
-    module Example
-      class LogoScreen < Flonkerton::Screen
-        attr_reader :value
-        def setup
-          @value = 100
-        end
-      end
-    end
-    assert_equal 100, Example::LogoScreen.new(@game).value
   end
 end
 
