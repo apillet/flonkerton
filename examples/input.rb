@@ -1,7 +1,7 @@
 require '../lib/flonkerton'
-require 'extras/input_handler'
-require 'extras/fill'
-require 'extras/random_color'
+require './extras/input_handler'
+require './extras/fill'
+require './extras/random_color'
 include Gosu
 include Flonkerton
 

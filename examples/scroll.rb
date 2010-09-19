@@ -1,9 +1,9 @@
 require '../lib/flonkerton'
-require 'extras/actor'
-require 'extras/mouse_border'
-require 'extras/scrollable'
-require 'extras/input_handler'
-require 'extras/random_color'
+require './extras/actor'
+require './extras/mouse_border'
+require './extras/scrollable'
+require './extras/input_handler'
+require './extras/random_color'
 
 include Gosu
 include Flonkerton

@@ -1,5 +1,5 @@
 require '../lib/flonkerton'
-require 'extras/fill'
+require './extras/fill'
 include Gosu
 include Flonkerton
 
